@@ -1,0 +1,1 @@
+{"message"=>"GAME OVER", "sessionId"=>"06a214a4324763e2be4673f47f9ff502", "data"=>{"playerId"=>"davidhuangdw@163.com", "sessionId"=>"06a214a4324763e2be4673f47f9ff502", "totalWordCount"=>80, "correctWordCount"=>78, "totalWrongGuessCount"=>222, "score"=>1338, "datetime"=>"2014-12-21 15:51:11"}}

@@ -45,3 +45,7 @@ end
 
 ```
 
+### Run
+
+`ruby main.rb`
+

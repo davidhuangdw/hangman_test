@@ -3,22 +3,29 @@ require 'forwardable'
 # Game's template_methods: first_current, update_current_after_guess(char)
 class Game
   attr_accessor :answer, :current, :tries, :solver
-  def initialize(solver,**option)
-    @solver = solver
-    @tries = 0
-    @current = first_current
+  def initialize(solver_klass,**option)
+    @solver_klass = solver_klass
   end
 
   def run
+    reset
     tell_current
     until all_matched?
       update
+      break if fail?
       tell_current
     end
     tell_tries
+    after_run
   end
 
   private
+
+  def reset
+    @tries = 0
+    @current = first_current
+    @solver = @solver_klass.new
+  end
 
   def update
     char = ask_char
@@ -41,4 +48,6 @@ class Game
   def ask_char
     @solver.ask_char
   end
+  def fail?; @fail end
+  def after_run; end
 end

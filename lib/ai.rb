@@ -2,6 +2,7 @@ require 'set'
 require_relative 'word'
 class AI
   attr_reader :current, :len, :candidates, :excluded, :guess
+  FREQUENT_LETTERS = %w[e t a o i n s h r d l c u m w f g y p b v k j x q z]
 
   def guess_next_char
     raise "no current" unless current && current.any?
@@ -41,10 +42,15 @@ class AI
   def most_frequent_char
     filter_candidates
 
-    compute_freqs.max_by(&:last).tap do |pair|
+    pair = compute_freqs.max_by(&:last).tap do |pair|
       p current.join, excluded, pair
       p candidates.size, candidates.first(10)
-    end.first
+    end
+    if pair
+      pair.first
+    else
+      (FREQUENT_LETTERS - excluded.to_a).first
+    end
   end
 
   def compute_freqs

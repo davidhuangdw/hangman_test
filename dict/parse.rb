@@ -5,6 +5,7 @@ class Word
   def self.parse_raw(line)
     columns = to_columns(line)
     word,freq = [columns[0], columns[-3]]
+    word = columns[2] if word == '@'
     raise "not all digits: #{freq}" unless freq =~ /\A\d+\z/
     new(word.downcase,freq.to_i)
   end
